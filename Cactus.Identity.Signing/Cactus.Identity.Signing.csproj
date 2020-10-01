@@ -2,6 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Signing key rollover IdentityServer4 and CertManager</Title>
+        <Authors>Yan O</Authors>
+        <Copyright>CactussSoft</Copyright>
+        <PackageProjectUrl>https://github.com/CactusSoft/Cactus.Identity.Signing</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/CactusSoft/Cactus.Identity.Signing/blob/develop/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/CactusSoft/Cactus.Identity.Signing</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
