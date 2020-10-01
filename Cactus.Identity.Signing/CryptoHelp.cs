@@ -16,10 +16,10 @@ namespace Cactus.Identity.Signing
 			if (!File.Exists(keyFile)) throw new ArgumentException(nameof(keyFile));
 
 			var pubCert = File.ReadAllText(certFile);
-			var pubCertBytes = GetBytesFromPEM(pubCert, PemStringType.Certificate);
+			var pubCertBytes = GetBytesFromPem(pubCert, PemStringType.Certificate);
 
 			var privKey = File.ReadAllText(keyFile);
-			var privKeyBytes = GetBytesFromPEM(privKey, PemStringType.RsaPrivateKey);
+			var privKeyBytes = GetBytesFromPem(privKey, PemStringType.RsaPrivateKey);
 
 			var cert = new X509Certificate2(pubCertBytes);
 			var rsa = RSA.Create();
@@ -29,52 +29,12 @@ namespace Cactus.Identity.Signing
 		}
 
 		/// <summary>
-		/// This helper function parses an integer size from the reader using the ASN.1 format
-		/// </summary>
-		/// <param name="rd"></param>
-		/// <returns></returns>
-		public static int DecodeIntegerSize(BinaryReader rd)
-		{
-			int count;
-
-			var byteValue = rd.ReadByte();
-			if (byteValue != 0x02) // indicates an ASN.1 integer value follows
-				return 0;
-
-			byteValue = rd.ReadByte();
-			if (byteValue == 0x81)
-			{
-				count = rd.ReadByte(); // data size is the following byte
-			}
-			else if (byteValue == 0x82)
-			{
-				byte hi = rd.ReadByte(); // data size in next 2 bytes
-				byte lo = rd.ReadByte();
-				count = BitConverter.ToUInt16(new[] {lo, hi}, 0);
-			}
-			else
-			{
-				count = byteValue; // we already have the data size
-			}
-
-			//remove high order zeros in data
-			while (rd.ReadByte() == 0x00)
-			{
-				count -= 1;
-			}
-
-			rd.BaseStream.Seek(-1, SeekOrigin.Current);
-
-			return count;
-		}
-
-		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="pemString"></param>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public static byte[] GetBytesFromPEM(string pemString, PemStringType type)
+		private static byte[] GetBytesFromPem(string pemString, PemStringType type)
 		{
 			string header;
 			string footer;
@@ -98,33 +58,7 @@ namespace Cactus.Identity.Signing
 			return Convert.FromBase64String(pemString.Substring(start, end));
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="inputBytes"></param>
-		/// <param name="alignSize"></param>
-		/// <returns></returns>
-		public static byte[] AlignBytes(byte[] inputBytes, int alignSize)
-		{
-			int inputBytesSize = inputBytes.Length;
-
-			if ((alignSize != -1) && (inputBytesSize < alignSize))
-			{
-				byte[] buf = new byte[alignSize];
-				for (int i = 0; i < inputBytesSize; ++i)
-				{
-					buf[i + (alignSize - inputBytesSize)] = inputBytes[i];
-				}
-
-				return buf;
-			}
-			else
-			{
-				return inputBytes; // Already aligned, or doesn't need alignment
-			}
-		}
-
-		public enum PemStringType
+		private enum PemStringType
 		{
 			Certificate,
 			RsaPrivateKey
