@@ -10,7 +10,7 @@
         <PackageLicenseUrl>https://github.com/CactusSoft/Cactus.Identity.Signing/blob/develop/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/CactusSoft/Cactus.Identity.Signing</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
