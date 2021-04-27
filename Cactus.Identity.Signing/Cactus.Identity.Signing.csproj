@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Signing key rollover IdentityServer4 and CertManager</Title>
         <Authors>Yan O</Authors>
@@ -10,12 +10,12 @@
         <PackageLicenseUrl>https://github.com/CactusSoft/Cactus.Identity.Signing/blob/develop/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/CactusSoft/Cactus.Identity.Signing</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageVersion>1.0.3</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="IdentityServer4" Version="3.1.0" />
-      <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.7.0" />
+      <PackageReference Include="IdentityServer4" Version="4.1.2" />
+      <PackageReference Include="System.Security.Cryptography.Pkcs" Version="5.0.1" />
     </ItemGroup>
 
 </Project>
