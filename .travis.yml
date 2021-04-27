@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 5
+dotnet: 5.0
 solution: Cactus.Identity.Signing.sln
 env:
   global:
